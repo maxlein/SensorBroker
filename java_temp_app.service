@@ -1,0 +1,12 @@
+[Unit]
+Description=Java-Temperature-Reader
+After=multi-user.target
+user=osmc
+
+[Service]
+Type=simple
+ExecStart=/home/osmc/start_spring_app.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
