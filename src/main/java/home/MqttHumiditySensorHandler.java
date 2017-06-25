@@ -15,10 +15,9 @@ public class MqttHumiditySensorHandler extends IFSensorData {
 
     public void addHumidityReading(String location, String humidity){
 
-        String id = location+humidity;
-        if (!sensorItems.containsKey(id)) {
-            sensorItems.put(id, SensorItem.createHumiditySensorItem(location));
-        }
+        SensorItem item = SensorItem.createHumiditySensorItem(location);
+        String id = item.item.getName();
+        addItemIfAbsent(item);
 
         SensorItem sensorItem = sensorItems.get(id);
         sensorItems.get(id).item.setState(humidity);

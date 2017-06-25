@@ -16,10 +16,9 @@ public class MqttSensorHandler extends IFSensorData {
 
     public void addTemperatureReading(String location, String temperature){
 
-        String id = location+temperature;
-        if (!sensorItems.containsKey(id)) {
-            sensorItems.put(id, SensorItem.createTemperatureSensorItem(location));
-        }
+        SensorItem item = SensorItem.createTemperatureSensorItem(location);
+        String id = item.item.getName();
+        addItemIfAbsent(item);
 
         SensorItem sensorItem = sensorItems.get(id);
         sensorItems.get(id).item.setState(temperature);

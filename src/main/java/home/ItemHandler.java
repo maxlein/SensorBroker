@@ -68,6 +68,15 @@ public class ItemHandler {
             restHandler.updateItemState(sensorItem.item);
             return;
         }
-        log.info(sensorItem.item.getName() + " is not valid!");
+        else {
+            log.debug(sensorItem.item.getName() + " is not valid! Deleting item");
+            removeItem(sensorItem);
+        }
+    }
+
+    private void removeItem(SensorItem sensorItem) {
+        for (IFSensorData sensorData : ifSensorData) {
+            sensorData.removeItem(sensorItem.item.getName());
+        }
     }
 }

@@ -31,7 +31,7 @@ public class SensorItem {
 
     public boolean isValid() {
         long age = (System.currentTimeMillis() - lastUpdateTime)/1000;
-        log.info("age of sensor is " + age + ", timeout: " + sensorValidTimeout);
+        log.debug("age of sensor is " + age + ", timeout: " + sensorValidTimeout);
         return age < sensorValidTimeout;
     }
 }

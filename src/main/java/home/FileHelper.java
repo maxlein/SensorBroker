@@ -46,17 +46,16 @@ public class FileHelper {
             e.printStackTrace();
         }
 
-        list.forEach(System.out::println);
+        //list.forEach(System.out::println);
         String tempLine = list.get(0);
         return tempLine.substring(tempLine.lastIndexOf("t=") + 2);
-
     }
 
     public static String getTemperatureFromDS1820SensorReading(String path, String sensorFolderStartingWith, String sensorFile){
         List<File> filteredSubDirs = FileHelper.getSubDirectories(path, sensorFolderStartingWith);
-        log.info("size is " + filteredSubDirs.size() + ", path: " + filteredSubDirs.get(0).getPath() + ", abs path: " + filteredSubDirs.get(0).getAbsolutePath());
+        log.debug("size is " + filteredSubDirs.size() + ", path: " + filteredSubDirs.get(0).getPath() + ", abs path: " + filteredSubDirs.get(0).getAbsolutePath());
         List<File> files = FileHelper.getFilesWithName(filteredSubDirs.get(0).getPath(), sensorFile);
-        log.info("files: " + files.size() + ", file: " + files.get(0).getName());
+        log.debug("files: " + files.size() + ", file: " + files.get(0).getName());
         return FileHelper.parseFileForTemperature(files.get(0));
     }
 

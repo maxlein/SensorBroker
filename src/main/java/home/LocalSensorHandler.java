@@ -38,10 +38,9 @@ public class LocalSensorHandler extends IFSensorData {
             return;
         }
 
-        String id = roomName+temperature;
-        if (!sensorItems.containsKey(id)) {
-            sensorItems.put(id, SensorItem.createTemperatureSensorItem(roomName));
-        }
+        SensorItem item = SensorItem.createTemperatureSensorItem(roomName);
+        String id = item.item.getName();
+        addItemIfAbsent(item);
 
         SensorItem sensorItem = sensorItems.get(id);
         sensorItems.get(id).item.setState(temperature);
@@ -60,7 +59,7 @@ public class LocalSensorHandler extends IFSensorData {
             Integer temp = Integer.parseInt(temperature);
             Double temp_conv = temp / 1000.0;
             temperature = String.valueOf(temp_conv);
-            log.info(temperature + ", int: " + temp + ", double: " + temp_conv);
+            log.debug(temperature + ", int: " + temp + ", double: " + temp_conv);
             return temperature;}
         catch (Exception e){
             log.error("getTemperature(): Exception=" + e.getMessage());
